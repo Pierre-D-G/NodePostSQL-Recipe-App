@@ -1,14 +1,26 @@
-<div class="ui segment">
-    <p class="ui header center aligned">{{title}}</h1>
 
-
-    {{#recipes}}
-    <div class="ui raised segment">
-        <h3>{{name}} 
-            <button class="ui icon button">
-                <i class="angle double down icon"></i>
-            </button>
-        </h3>
-    </div>
-    {{/recipes}}
+        {{#recipes}}
+        <div class="well">
+            <h4>{{name}}
+                <button class="btn btn-default pull-right" data-toggle="collapse" href="#recipe_{{id}}"
+                aria-expanded="false" aria-controls="recipe_{{id}}">
+                <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+                </button>
+            </h4>
+            <div class="collapse" id="recipe_{{id}}">
+              <br>
+              <p><strong>Ingredients: </strong>{{ingredients}}</p>
+              <hr>
+              <p><strong>Directions: </strong>{{directions}}</p>
+              <br>
+              <hr>
+              <button class="btn btn-default">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+              </button>
+               <button class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
+            </div>  
+        </div>
+        {{/recipes}}
 </div>
