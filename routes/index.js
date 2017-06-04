@@ -29,13 +29,30 @@ router.get('/', function (req, res, next) {
         return console.error('error running query', err);
       }
       done(err);
-      res.render('index', { 
+      res.render('index', {
         title: 'Recipes',
         recipes: result.rows
-       });
+      });
     });
   });
 
 });
 
+router.post('/add', function (req, res) {
+  pg.connect(config, function (err, client, done) {
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query("INSERT INTO recipes(name, ingredients, directions) VALUES($1, $2, $3)", [
+      req.body.name, req.body.ingredients, req.body.directions
+    ], function(err, success){
+      if(err){
+       return  console.error('error excecuting insert query', err);
+      }
+       done(err);
+      res.redirect('/');
+    });
+   
+  });
+});
 module.exports = router;
