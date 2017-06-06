@@ -45,14 +45,32 @@ router.post('/add', function (req, res) {
     }
     client.query("INSERT INTO recipes(name, ingredients, directions) VALUES($1, $2, $3)", [
       req.body.name, req.body.ingredients, req.body.directions
-    ], function(err, success){
-      if(err){
-       return  console.error('error excecuting insert query', err);
+    ], function (err, success) {
+      if (err) {
+        return console.error('error excecuting insert query', err);
       }
-       done(err);
+      done(err);
       res.redirect('/');
     });
-   
+
   });
 });
+
+router.delete('/delete/:id', function (req, res) {
+  pg.connect(config, function (err, client, done) {
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query("DELETE FROM recipes WHERE id = $1", [
+      req.params.id
+    ],  function(err, success){
+      if (err) {
+        return console.error('error excecuting insert query', err);
+      }
+      done(err);
+      res.send(200);
+    });
+  });
+});
+
 module.exports = router;

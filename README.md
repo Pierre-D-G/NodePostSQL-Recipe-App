@@ -23,7 +23,15 @@ Deleting data from a database
 
 * Handlebars as template view engine
 
-## Getting Started
+## TODO 
+
+- ~~Inserting recipe data frm form into database~~
+
+- ~~Displaying recipe data from database~~
+
+- ~~Deleting recipes from the database~~
+
+- Editing recipe data thats already in the database
 
 
 
