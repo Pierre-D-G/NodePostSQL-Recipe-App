@@ -73,4 +73,21 @@ router.delete('/delete/:id', function (req, res) {
   });
 });
 
+router.post('/edit', function (req, res) {
+  pg.connect(config, function (err, client, done) {
+    if (err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query("UPDATE recipes SET name=$1, ingredients=$2, directions=$3 WHERE id=$4", [
+      req.body.name, req.body.ingredients, req.body.directions, req.body.id
+    ],  function(err, success){
+      if (err) {
+        return console.error('error excecuting insert query', err);
+      }
+      done(err);
+      res.redirect('/');
+    });
+  });
+});
+
 module.exports = router;
